@@ -1,8 +1,8 @@
 #-*- coding: UTF-8 -*- 
 from eventanalyze import eventlistanalyze
+from vulnerability import vulnerabilityanalyzer
 
-event_memoryread=0
-event_memorywrite=1
+event_memoryaccess=0
 event_syscall=2
 event_trap2b=3
 event_trap2e=4
@@ -17,14 +17,18 @@ filepath="C:\\Users\\xsw\\Desktop\\logs\\MemoryMonRWE.log"
 
 filehandle=open(filepath)
 eventlist=[]
+linenumber=0
+
 
 while True:
     line=filehandle.readline()
     if not line:
         break
-    event=eventlistanalyze(line)
+    linenumber+=1
+    event=eventlistanalyze(line,linenumber)
     if event:
         eventlist.append(event)
 
-print(eventlist)
 filehandle.close()
+
+vulnerabilityanalyzer(eventlist)
