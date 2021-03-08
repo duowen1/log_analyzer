@@ -19,12 +19,14 @@ parser=argparse.ArgumentParser(description='Process the log created by MemoryMon
 parser.add_argument('-p','--path',help='the path of log')
 parser.add_argument('-d','--doublefetch',action='store_true',help='analyze DoubleFetch Vulnerabilities form the log')
 parser.add_argument('-u','--unprobe',action='store_true',help='analyze Unprobe Vulnerabilities from the log')
+parser.add_argument('-f','--uaf',action='store_true',help='analyze Use After Free Vulnerabilities from the log')
+parser.add_argument('-o','--oob',action='store_true',help='analyze OOB Vulnerabilities form the log')
 args=parser.parse_args()
 
 if args.path:
     filepath=args.path
 else:
-    filepath="C:\\Users\\xsw\\Desktop\\logs\\MemoryMonRWE.log"
+    filepath="C:\\Users\\xsw\\Desktop\\logging\\MemoryMonRWE.log"
 
 print(filepath)
 
@@ -61,3 +63,7 @@ if args.doublefetch:
 if args.unprobe:
     print('analyze Unprobe')
     vulnerability.unprobeanalyzer(eventlist)
+
+if args.oob or args.uaf:
+    print('unsupport for now')
+    
